@@ -196,7 +196,7 @@ public class GameMap : IGameMap
 		var points = new List<Vector2>();
 		var lines = new List<Tuple<Vector2, Vector2>>();
 		for (int i=0; i<n; i++) {
-			Vector2 position = new Vector2(Random.Range(-10.0F, 10.0F),Random.Range(-10.0F, 10.0F));	
+			Vector2 position = new Vector2(UnityEngine.Random.Range(-10.0F, 10.0F),UnityEngine.Random.Range(-10.0F, 10.0F));	
 			points.Add(position);
 		}
 		Console.WriteLine (points);
