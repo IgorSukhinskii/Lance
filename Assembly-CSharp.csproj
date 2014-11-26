@@ -49,6 +49,24 @@
      <Compile Include="Assets\MapGen\MapGen.cs" />
      <Compile Include="Assets\TestScript.cs" />
      <Compile Include="Assets\Tuple.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\DelaunayHelpers.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\Edge.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\EdgeList.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\EdgeReorderer.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\Halfedge.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\HalfedgePriorityQueue.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\ICoord.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\LR.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\Site.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\SiteList.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\Triangle.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\Vertex.cs" />
+     <Compile Include="Assets\Unity-delaunay\Delaunay\Voronoi.cs" />
+     <Compile Include="Assets\Unity-delaunay\geom\Circle.cs" />
+     <Compile Include="Assets\Unity-delaunay\geom\LineSegment.cs" />
+     <Compile Include="Assets\Unity-delaunay\geom\Polygon.cs" />
+     <Compile Include="Assets\Unity-delaunay\geom\Winding.cs" />
+     <Compile Include="Assets\Unity-delaunay\utils\IDisposable.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

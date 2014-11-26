@@ -4,7 +4,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Assets;
 using System;
-
+using Delaunay;
+using Delaunay.Geo;
 
 
 public class MapGen : MonoBehaviour {
@@ -73,7 +74,7 @@ public class MapGen : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		var map = GameMap.TestCreate();
+		var map = GameMap.Generate();
 		foreach (var p in map.GetProvinces())
 		{
 			var region = new GameObject("NewRegion");
@@ -137,6 +138,7 @@ public class GameMap : IGameMap
 	public void AddBorder(int province1, int province2)
 	{
 		matrix[new Tuple<int, int>(province1, province2)] = true;
+		matrix[new Tuple<int, int>(province2, province1)] = true;
 	}
 	public static GameMap TestCreate()
 	{
@@ -194,21 +196,19 @@ public class GameMap : IGameMap
 		GameMap gameRes = new GameMap();
 		int n = 50;
 		var points = new List<Vector2>();
+		var colors = new List<uint> ();
 		var lines = new List<Tuple<Vector2, Vector2>>();
 		for (int i=0; i<n; i++) {
-			Vector2 position = new Vector2(UnityEngine.Random.Range(-10.0F, 10.0F),UnityEngine.Random.Range(-10.0F, 10.0F));	
-			points.Add(position);
+			points.Add(new Vector2(UnityEngine.Random.Range(-10.0F, 10.0F),UnityEngine.Random.Range(-10.0F, 10.0F)));
+			colors.Add (0);
 		}
-		Console.WriteLine (points);
-		for (int i=0; i<points.Count-1; i++) {
-			for(int j=i+1;j<points.Count;j++){
-				if (points[i] != points[j]){
-					var mid = (points[i] + points[j])/2;
-					var norm = points[j] - points[i];
-					Tuple<Vector2,Vector2> dir = new Tuple<Vector2, Vector2>(mid,norm);
-					lines.Add (dir);
-				}
-			}
+		Delaunay.Voronoi v = new Delaunay.Voronoi (points, colors, new Rect (-10.0F, -10.0F, 20.0F, 20.0F));
+		var regions = v.SiteCoords ();
+		foreach (var pts in v.Regions()) {
+			var prov = new Province();
+			prov.Border = pts.ToList();
+			prov.Name = "name"; // TODO: generate cool name
+			gameRes.AddProvince(prov);
 		}
 		return gameRes;
 	}
