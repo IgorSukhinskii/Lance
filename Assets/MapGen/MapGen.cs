@@ -140,57 +140,6 @@ public class GameMap : IGameMap
 		matrix[new Tuple<int, int>(province1, province2)] = true;
 		matrix[new Tuple<int, int>(province2, province1)] = true;
 	}
-	public static GameMap TestCreate()
-	{
-		GameMap gameRes = new GameMap();
-		Province prov = new Province();
-		prov.Name = "1";
-		prov.Border = new List<Vector2>();
-		prov.Border.Add(new Vector2(-3, -3));
-		prov.Border.Add(new Vector2(-3, 1));
-		prov.Border.Add(new Vector2(4, -3));
-		gameRes.AddProvince(prov);
-		prov = new Province();
-		prov.Name = "2";
-		prov.Border = new List<Vector2>();
-		prov.Border.Add(new Vector2(-3, 1));
-		prov.Border.Add(new Vector2(-1, 3));
-		prov.Border.Add(new Vector2(2, 3));
-		prov.Border.Add(new Vector2(5, 1));
-		prov.Border.Add(new Vector2(4, -3));
-		gameRes.AddProvince(prov);
-		gameRes.AddBorder(0, 1);
-		prov = new Province();
-		prov.Name = "3";
-		prov.Border = new List<Vector2>();
-		prov.Border.Add(new Vector2(2, 3));
-		prov.Border.Add(new Vector2(4, 7));
-		prov.Border.Add(new Vector2(8, 7));
-		prov.Border.Add(new Vector2(8, 3));
-		prov.Border.Add(new Vector2(5, 1));
-		gameRes.AddProvince(prov);
-		gameRes.AddBorder(2, 1);
-		prov = new Province();
-		prov.Name = "4";
-		prov.Border = new List<Vector2>();
-		prov.Border.Add(new Vector2(-1, 3));
-		prov.Border.Add(new Vector2(4, 7));
-		prov.Border.Add(new Vector2(2, 3));
-		gameRes.AddProvince(prov);
-		gameRes.AddBorder(2, 3);
-		gameRes.AddBorder(1, 3);
-		prov = new Province();
-		prov.Name = "5";
-		prov.Border = new List<Vector2>();
-		prov.Border.Add(new Vector2(4, -3));
-		prov.Border.Add(new Vector2(5, 1));
-		prov.Border.Add(new Vector2(8, 3));
-		prov.Border.Add(new Vector2(12, -2));
-		gameRes.AddProvince(prov);
-		gameRes.AddBorder(2, 4);
-		gameRes.AddBorder(1, 4);
-		return gameRes;
-	}
 
 	public static GameMap Generate(){
 		GameMap gameRes = new GameMap();

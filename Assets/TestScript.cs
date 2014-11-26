@@ -7,6 +7,7 @@ public class TestScript : MonoBehaviour {
 	private bool selected = false;
 	void OnMouseDown()
 	{
+		Debug.Log ("mouse down");
 		if (selected)
 			border.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.black);
 		else
