@@ -6,6 +6,7 @@ using Assets;
 using System;
 using Delaunay;
 using Delaunay.Geo;
+using ProceduralGeneration;
 
 
 public class MapGen : MonoBehaviour {
@@ -142,6 +143,7 @@ public class GameMap : IGameMap
 	}
 
 	public static GameMap Generate(){
+		var nameGen = new NameGenerator ();
 		GameMap gameRes = new GameMap();
 		int n = 50;
 		var points = new List<Vector2>();
@@ -156,7 +158,8 @@ public class GameMap : IGameMap
 		foreach (var pts in v.Regions()) {
 			var prov = new Province();
 			prov.Border = pts.ToList();
-			prov.Name = "name"; // TODO: generate cool name
+			prov.Name = nameGen.getName();
+			Debug.Log (prov.Name);
 			gameRes.AddProvince(prov);
 		}
 		return gameRes;
