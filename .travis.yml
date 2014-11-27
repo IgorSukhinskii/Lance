@@ -16,4 +16,4 @@ before_install:
  - sudo installer -pkg "/Volumes/Unity Installer/Unity.pkg" -target /
 
 script:
- - xbuild Lance.sln
+ - xbuild Lance-Travis.sln
