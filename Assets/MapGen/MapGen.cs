@@ -7,6 +7,7 @@ using System;
 using Delaunay;
 using Delaunay.Geo;
 using ProceduralGeneration;
+using Players;
 
 
 public class MapGen : MonoBehaviour {
@@ -169,6 +170,6 @@ public class GameMap : IGameMap
 public class Province
 {
 	public string Name { get; set; }
-	
+	Players Owner;
 	public List<Vector2> Border { get; set; }
 }
