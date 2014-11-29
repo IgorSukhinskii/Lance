@@ -4,9 +4,6 @@ using System.Linq;
 using System.Collections.Generic;
 using Assets;
 using System;
-using Delaunay;
-using Delaunay.Geo;
-using ProceduralGeneration;
 using System.IO;
 using MiniJSON;
 
@@ -16,11 +13,12 @@ namespace Players{
 		public int Resources;
 		public int Peasants;
 		public int ManPower;
+        public List<IOwned> Owned;
 	}
 	public class SquadType{
-		public int MaxStrength;
-		public int Attack;
-		public int Defence;
+		public readonly int MaxStrength;
+		public readonly int Attack;
+		public readonly int Defence;
         private static Dictionary<string, SquadType> types;
         private SquadType(int maxStrength, int attack, int defence)
         {
@@ -54,12 +52,38 @@ namespace Players{
             return SquadType.types[name];
         }
 	}
-	public class Squad{
-		public int Strength;
-		public string Name;
-		public SquadType Type;
+	public class Squad: IOwned{
+		private int strength;
+        public int Strength
+        {
+            get
+            {
+                return this.strength;
+            }
+            set
+            {
+                if (value > this.Type.MaxStrength)
+                {
+                    this.strength = this.Type.MaxStrength;
+                }
+                else if (value < 0)
+                {
+                    this.strength = 0;
+                }
+                else
+                {
+                    this.strength = value;
+                }
+            }
+        }
+		private string name;
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+		public readonly SquadType Type;
 	}
-	
-	
-	
 }
