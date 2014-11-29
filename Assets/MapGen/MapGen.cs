@@ -98,6 +98,8 @@ public class MapGen : MonoBehaviour {
 			regionScript.border = borderObject;
 			region.AddComponent<MeshCollider>();
 		}
+        SquadType.FromJSON("squad_types.json");
+        Debug.Log(SquadType.ByName("Knights").Attack.ToString());
 	}
 	
 	// Update is called once per frame
@@ -170,6 +172,6 @@ public class GameMap : IGameMap
 public class Province
 {
 	public string Name { get; set; }
-	Players Owner;
+	Player Owner;
 	public List<Vector2> Border { get; set; }
 }

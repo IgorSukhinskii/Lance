@@ -1,0 +1,17 @@
+{
+	"Archers": {
+		"MaxStrength": 200,
+		"Attack": 10,
+		"Defence": 2
+	},
+	"Knights": {
+		"MaxStrength": 50,
+		"Attack": 20,
+		"Defence": 15
+	},
+	"Levies": {
+		"MaxStrength": 150,
+		"Attack": 5,
+		"Defence": 10
+	}
+}
