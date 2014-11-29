@@ -46,7 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\IOwned.cs" />
      <Compile Include="Assets\MapGen\MapGen.cs" />
+	 <Compile Include="Assets\MapGen\Player.cs" />
      <Compile Include="Assets\MiniJSON.cs" />
      <Compile Include="Assets\NameGenerator.cs" />
      <Compile Include="Assets\TestScript.cs" />
