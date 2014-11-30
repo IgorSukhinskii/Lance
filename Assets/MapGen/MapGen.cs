@@ -18,15 +18,12 @@ public class MapGen : MonoBehaviour {
 		m.vertices = prov.Border.Select(v => new Vector3(v.x, v.y, 0)).ToArray();
 		m.uv = prov.Border.ToArray();
 		var triangles = new List<int>();
-		Debug.Log(prov.Name);
-		Debug.Log("vertices: " + prov.Border.Count);
 		for (int i = 1; i < prov.Border.Count - 1; i++)
 		{
 			triangles.Add(0);
 			triangles.Add(i);
 			triangles.Add(i + 1);
 		}
-		Debug.Log("triangles: " + triangles.Aggregate("", (s, i) => s + " " + i));
 		m.triangles = triangles.ToArray();
 		m.RecalculateNormals();
 		
@@ -94,12 +91,11 @@ public class MapGen : MonoBehaviour {
 			bRenderer.material.shader = Shader.Find("Toon/Basic");
 			bRenderer.material.SetColor("_Color", Color.black);
 			borderObject.transform.parent = region.transform;
+            region.AddComponent<MeshCollider>();
 			TestScript regionScript = region.AddComponent<TestScript>();
 			regionScript.border = borderObject;
-			region.AddComponent<MeshCollider>();
 		}
         SquadType.FromJSON("squad_types.json");
-        Debug.Log(SquadType.ByName("Knights").Attack.ToString());
 	}
 	
 	// Update is called once per frame
@@ -160,9 +156,9 @@ public class GameMap : IGameMap
 		var regions = v.SiteCoords ();
 		foreach (var pts in v.Regions()) {
 			var prov = new Province();
-			prov.Border = pts.ToList();
+            prov.Border = pts.Reverse<Vector2>().ToList();
 			prov.Name = nameGen.getName();
-			Debug.Log (prov.Name);
+
 			gameRes.AddProvince(prov);
 		}
 		return gameRes;
