@@ -6,11 +6,14 @@ using Assets;
 using System;
 using Delaunay;
 using Delaunay.Geo;
-using ProceduralGeneration;
-using Players;
+using GameWorld;
+using GameWorld.Players;
+using GameWorld.Map;
 
-
-public class MapGen : MonoBehaviour {
+public class Main : MonoBehaviour {
+    List<Player> Players;
+    int currentP;
+    GameMap map;
 	static Mesh CreateMesh(Province prov)
 	{
 		Mesh m = new Mesh();
@@ -70,10 +73,19 @@ public class MapGen : MonoBehaviour {
 		b.RecalculateNormals();
 		return b;
 	}
-	
+
+    void InitPlayers()
+    {
+        this.Players = new List<Player>();
+        for (int i = 0; i < 4; i++)
+        {
+            this.Players.Add(Player.Prototype.Copy());
+        }
+        currentP = 0;
+    }
 	// Use this for initialization
 	void Start () {
-		var map = GameMap.Generate();
+		map = GameMap.Generate();
 		foreach (var p in map.GetProvinces())
 		{
 			var region = new GameObject("NewRegion");
@@ -92,82 +104,15 @@ public class MapGen : MonoBehaviour {
 			bRenderer.material.SetColor("_Color", Color.black);
 			borderObject.transform.parent = region.transform;
             region.AddComponent<MeshCollider>();
-			TestScript regionScript = region.AddComponent<TestScript>();
+			ClickableProvince regionScript = region.AddComponent<ClickableProvince>();
 			regionScript.border = borderObject;
 		}
         SquadType.FromJSON("squad_types.json");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-}
-
-public interface IGameMap
-{
-	IEnumerable<Province> GetProvinces();
-	
-	bool Bordered(int province1, int province2);
-}
-
-public class GameMap : IGameMap
-{
-	private List<Province> provinces;
-	private Dictionary<Tuple<int, int>, bool> matrix;
-	public IEnumerable<Province> GetProvinces()
-	{
-		return provinces;
-	}
-	
-	public GameMap()
-	{
-		provinces = new List<Province>();
-		matrix = new Dictionary<Tuple<int, int>, bool>();
-	}
-	
-	public bool Bordered(int province1, int province2)
-	{
-		return matrix.ContainsKey(new Tuple<int, int>(province1, province2));
-	}
-	
-	public void AddProvince(Province province)
-	{
-		provinces.Add(province);
-	}
-	public void AddBorder(int province1, int province2)
-	{
-		matrix[new Tuple<int, int>(province1, province2)] = true;
-		matrix[new Tuple<int, int>(province2, province1)] = true;
-	}
-
-	public static GameMap Generate(){
-		var nameGen = new NameGenerator ();
-		GameMap gameRes = new GameMap();
-		int n = 50;
-		var points = new List<Vector2>();
-		var colors = new List<uint> ();
-		var lines = new List<Tuple<Vector2, Vector2>>();
-		for (int i=0; i<n; i++) {
-			points.Add(new Vector2(UnityEngine.Random.Range(-10.0F, 10.0F),UnityEngine.Random.Range(-10.0F, 10.0F)));
-			colors.Add (0);
-		}
-		Delaunay.Voronoi v = new Delaunay.Voronoi (points, colors, new Rect (-10.0F, -10.0F, 20.0F, 20.0F));
-		var regions = v.SiteCoords ();
-		foreach (var pts in v.Regions()) {
-			var prov = new Province();
-            prov.Border = pts.Reverse<Vector2>().ToList();
-			prov.Name = nameGen.getName();
-
-			gameRes.AddProvince(prov);
-		}
-		return gameRes;
-	}
-}
-
-public class Province
-{
-	public string Name { get; set; }
-	Player Owner;
-	public List<Vector2> Border { get; set; }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Players
+namespace GameWorld.Players
 {
     public abstract class IOwned
     {
@@ -16,8 +16,11 @@ namespace Players
             }
             set
             {
-                this.owner.Owned.Remove(this);
-                value.Owned.Add(this);
+                if (this.owner != null)
+                {
+                    this.owner.Owned.Remove(this);
+                    value.Owned.Add(this);
+                }
                 this.owner = value;
             }
         }

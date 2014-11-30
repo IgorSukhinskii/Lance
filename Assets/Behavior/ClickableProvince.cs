@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class TestScript : MonoBehaviour {
+public class ClickableProvince : MonoBehaviour {
 	
 	public GameObject border;
 	private bool selected = false;

@@ -46,35 +46,37 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\IOwned.cs" />
-     <Compile Include="Assets\MapGen\MapGen.cs" />
-	 <Compile Include="Assets\MapGen\Player.cs" />
-     <Compile Include="Assets\MiniJSON.cs" />
-     <Compile Include="Assets\NameGenerator.cs" />
-     <Compile Include="Assets\TestScript.cs" />
-     <Compile Include="Assets\Tuple.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\DelaunayHelpers.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\Edge.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\EdgeList.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\EdgeReorderer.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\Halfedge.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\HalfedgePriorityQueue.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\ICoord.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\LR.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\Site.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\SiteList.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\Triangle.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\Vertex.cs" />
-     <Compile Include="Assets\Unity-delaunay\Delaunay\Voronoi.cs" />
-     <Compile Include="Assets\Unity-delaunay\geom\Circle.cs" />
-     <Compile Include="Assets\Unity-delaunay\geom\LineSegment.cs" />
-     <Compile Include="Assets\Unity-delaunay\geom\Polygon.cs" />
-     <Compile Include="Assets\Unity-delaunay\geom\Winding.cs" />
-     <Compile Include="Assets\Unity-delaunay\utils\IDisposable.cs" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
-     <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
+    <Compile Include="Assets\GameWorld\GameWorld.cs" />
+    <Compile Include="Assets\GameWorld\IOwned.cs" />
+    <Compile Include="Assets\GameWorld\Map.cs" />
+    <Compile Include="Assets\Behavior\Main.cs" />
+    <Compile Include="Assets\GameWorld\Player.cs" />
+    <Compile Include="Assets\Utils\MiniJSON.cs" />
+    <Compile Include="Assets\GameWorld\NameGenerator.cs" />
+    <Compile Include="Assets\Behavior\ClickableProvince.cs" />
+    <Compile Include="Assets\Utils\Tuple.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\DelaunayHelpers.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\Edge.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\EdgeList.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\EdgeReorderer.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\Halfedge.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\HalfedgePriorityQueue.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\ICoord.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\LR.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\Site.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\SiteList.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\Triangle.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\Vertex.cs" />
+    <Compile Include="Assets\Unity-delaunay\Delaunay\Voronoi.cs" />
+    <Compile Include="Assets\Unity-delaunay\geom\Circle.cs" />
+    <Compile Include="Assets\Unity-delaunay\geom\LineSegment.cs" />
+    <Compile Include="Assets\Unity-delaunay\geom\Polygon.cs" />
+    <Compile Include="Assets\Unity-delaunay\geom\Winding.cs" />
+    <Compile Include="Assets\Unity-delaunay\utils\IDisposable.cs" />
+    <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
+    <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-BasicOutline.shader" />
+    <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-LightedOutline.shader" />
+    <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Lighted.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

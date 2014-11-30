@@ -7,13 +7,48 @@ using System;
 using System.IO;
 using MiniJSON;
 
-namespace Players{
-	
-	public class Player  {
+namespace GameWorld.Players
+{	
+	public class Player {
 		public int Resources;
 		public int Peasants;
 		public int ManPower;
-        public List<IOwned> Owned;
+        public List<IOwned> Owned = new List<IOwned>();
+
+        static Player prototype = new Player();
+        public static Player Prototype
+        {
+            get
+            {
+                return Player.prototype;
+            }
+        }
+        public static void FromJson(string configName)
+        {
+            Player.prototype = new Player();
+            Dictionary<string, object> config;
+            using (StreamReader sr = new StreamReader(Path.Combine(Application.dataPath, configName)))
+            {
+                string line = "";
+                while (!sr.EndOfStream)
+                    line += sr.ReadLine();
+                Debug.Log(line);
+                config = Json.Deserialize(line) as Dictionary<string, object>;
+            }
+            Player.prototype.Resources = (int)(long)config["Resources"];
+            Player.prototype.Peasants = (int)(long)config["Peasants"];
+            Player.prototype.ManPower = (int)(long)config["ManPower"];
+        }
+
+        public Player Copy()
+        {
+            var copy = new Player();
+            copy.Resources = this.Resources;
+            copy.Peasants = this.Peasants;
+            copy.ManPower = this.ManPower;
+            copy.Owned = this.Owned.ToList();
+            return copy;
+        }
 	}
 	public class SquadType{
 		public readonly int MaxStrength;

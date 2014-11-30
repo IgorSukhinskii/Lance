@@ -4,7 +4,7 @@ using UnityEngine;
 using MiniJSON;
 using System.Collections.Generic;
 
-namespace ProceduralGeneration
+namespace GameWorld.ProceduralGeneration
 {
 	public class NameGenerator
 	{
