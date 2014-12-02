@@ -23,21 +23,28 @@ public class ButtonScript : MonoBehaviour {
 			return _icon;
 		}
 		set {
-			if (_iconGO == null) {
-				_iconGO = new GameObject ("icon");
-				_iconGO.AddComponent <Image> ();
+			if (value == null) {
+				if (_iconGO != null) 
+					_iconGO.SetActive (false);
+				_icon = value;
 			}
-			_iconGO.transform.SetParent(this.transform, false);
-			_iconGO.transform.localPosition = new Vector3 (0, 0, -0.1f);
-			_iconGO.transform.localScale = Vector3.one;
-			var iconRect = _iconGO.GetComponent <RectTransform> ();
-			iconRect.anchorMax = new Vector2 (0.5f, 1f);
-			iconRect.anchorMin = new Vector2 (0.5f, 1f);
-			var iconImage = _iconGO.GetComponent <Image> ();
-			iconImage.SetNativeSize ();
-			iconImage.sprite = value; 
-			_icon = value;
-			
+			else {
+				if (_iconGO == null) {
+					_iconGO = new GameObject ("icon");
+					_iconGO.AddComponent <Image> ();
+				}
+				_iconGO.SetActive (true);
+				_iconGO.transform.SetParent(this.transform, false);
+				_iconGO.transform.localPosition = new Vector3 (0, 0, -0.1f);
+				_iconGO.transform.localScale = Vector3.one;
+				var iconRect = _iconGO.GetComponent <RectTransform> ();
+				iconRect.anchorMax = new Vector2 (0.5f, 1f);
+				iconRect.anchorMin = new Vector2 (0.5f, 1f);
+				var iconImage = _iconGO.GetComponent <Image> ();
+				iconImage.SetNativeSize ();
+				iconImage.sprite = value; 
+				_icon = value;
+			}
 		}
 	}
 	
@@ -57,10 +64,12 @@ public class ButtonScript : MonoBehaviour {
 					var color = this.currentImage.color;
 					color.a = 1f;
 					this.currentImage.color = color;
-					var iconImage = this._iconGO.GetComponent <Image> ();
-					color = iconImage.color;
-					color.a = 1f;
-					iconImage.color = color;
+					if (icon != null) {
+						var iconImage = this._iconGO.GetComponent <Image> ();
+						color = iconImage.color;
+						color.a = 1f;
+						iconImage.color = color;
+					}
 					break;
 				}
 				case States.Clicked: {
@@ -72,10 +81,12 @@ public class ButtonScript : MonoBehaviour {
 					var color = this.currentImage.color;
 					color.a = 0.5f;
 					this.currentImage.color = color;
-					var iconImage = this._iconGO.GetComponent <Image> ();
-					color = iconImage.color;
-					color.a = 0.5f;
-					iconImage.color = color;
+					if (icon != null) {
+						var iconImage = this._iconGO.GetComponent <Image> ();
+						color = iconImage.color;
+						color.a = 0.5f;
+						iconImage.color = color;
+					}
 					break;
 				}
 			}
