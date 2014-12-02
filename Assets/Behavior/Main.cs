@@ -85,6 +85,8 @@ public class Main : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
+		//move it to some MapScript MonoBehaviour, attach MapScript to child GameObject of Main GO and add link in Main:
+		//public MapScript Map = blah blah blah;
 		map = GameMap.Generate();
 		foreach (var p in map.GetProvinces())
 		{
@@ -107,6 +109,7 @@ public class Main : MonoBehaviour {
 			ClickableProvince regionScript = region.AddComponent<ClickableProvince>();
 			regionScript.border = borderObject;
 		}
+		//
         SquadType.FromJSON("squad_types.json");
 
 	}
