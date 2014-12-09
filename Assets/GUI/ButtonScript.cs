@@ -135,8 +135,10 @@ public class ButtonScript : MonoBehaviour {
 	[SerializeField]
 	public Image currentImage { 
 		get {
-			if (_currentImage == null)
+			if (_currentImage == null) {
 				_currentImage = GetComponent <Image> ();
+				_currentImage.type = Image.Type.Sliced;
+				}
 			return _currentImage;
 		}
 	}
