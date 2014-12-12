@@ -7,6 +7,7 @@ public class SquadControlPanelScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		ProvinceScript.SelectedProvinceChanged += delegate(object sender, System.EventArgs e) {
+			
 			if (ProvinceScript.SelectedProvince != null) {
 				this.title.text = "Forces in " + ProvinceScript.SelectedProvince.name;
 			}

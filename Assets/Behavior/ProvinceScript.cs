@@ -30,7 +30,7 @@ public class ProvinceScript : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+		SelectedProvince = this;
 	}
 	
 	// Update is called once per frame

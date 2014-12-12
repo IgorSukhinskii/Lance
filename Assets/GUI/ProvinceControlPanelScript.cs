@@ -8,6 +8,7 @@ public class ProvinceControlPanelScript : MonoBehaviour {
 	void Start () {
 		ProvinceScript.SelectedProvinceChanged += delegate(object sender, System.EventArgs e) {
 			if (ProvinceScript.SelectedProvince != null) {
+				
 				this.title.text = ProvinceScript.SelectedProvince.name;
 			}
 			else {

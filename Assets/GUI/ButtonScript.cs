@@ -137,8 +137,8 @@ public class ButtonScript : MonoBehaviour {
 		get {
 			if (_currentImage == null) {
 				_currentImage = GetComponent <Image> ();
-				_currentImage.type = Image.Type.Sliced;
-				}
+			}
+			_currentImage.type = Image.Type.Sliced;
 			return _currentImage;
 		}
 	}
