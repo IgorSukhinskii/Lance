@@ -22,6 +22,8 @@ public class MainScript : MonoBehaviour {
 		War,
 	}
 	private Phases _currentPhase;
+	public event EventHandler EconomyPhaseStarted;
+	public event EventHandler WarPhaseStarted;
 	public Phases currentPhase {
 		get {
 			return _currentPhase;
@@ -31,9 +33,13 @@ public class MainScript : MonoBehaviour {
 			if (value == Phases.Economy) {
 				provinceControlPanel.gameObject.SetActive (true);
 				squadControlPanel.gameObject.SetActive (false);
+				if (EconomyPhaseStarted != null)
+					EconomyPhaseStarted (this, null);
 			} else {
 				provinceControlPanel.gameObject.SetActive (false);
 				squadControlPanel.gameObject.SetActive (true);
+				if (WarPhaseStarted != null)
+					WarPhaseStarted (this, null);
 			}
 		}
 	}

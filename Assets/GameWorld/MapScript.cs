@@ -74,15 +74,15 @@ public class MapScript : MonoBehaviour {
 		//move it to some MapScript MonoBehaviour, attach MapScript to child GameObject of Main GO and add link in Main:
 		//public MapScript Map = blah blah blah;
 		map = GameMap.Generate();
-		foreach (var p in map.GetProvinces())
+		foreach (var p in map.provinces)
 		{
-			var region = new GameObject(p.Name + " Province");
-			var meshFilter = region.AddComponent<MeshFilter>();
+			var provinceGO = new GameObject(p.Name + " Province");
+			var meshFilter = provinceGO.AddComponent<MeshFilter>();
 			meshFilter.mesh = CreateMesh(p);
-			var renderer = region.AddComponent<MeshRenderer>();
+			var renderer = provinceGO.AddComponent<MeshRenderer>();
 			renderer.material.shader = Shader.Find("Toon/Basic");
 			renderer.material.SetColor("_Color", Color.red);
-			region.transform.parent = gameObject.transform;
+			provinceGO.transform.parent = gameObject.transform;
 			
 			var borderObject = new GameObject("NewBorder");
 			var bMeshFilter = borderObject.AddComponent<MeshFilter>();
@@ -90,11 +90,11 @@ public class MapScript : MonoBehaviour {
 			var bRenderer = borderObject.AddComponent<MeshRenderer>();
 			bRenderer.material.shader = Shader.Find("Toon/Basic");
 			bRenderer.material.SetColor("_Color", Color.black);
-			borderObject.transform.parent = region.transform;
-			region.AddComponent<MeshCollider>();
-			ProvinceScript regionScript = region.AddComponent<ProvinceScript>();
-			regionScript.border = borderObject;
-			regionScript.name = p.Name;
+			borderObject.transform.parent = provinceGO.transform;
+			provinceGO.AddComponent<MeshCollider>();
+			ProvinceScript provinceScript = provinceGO.AddComponent<ProvinceScript>();
+			provinceScript.border = borderObject;
+			provinceScript.name = p.Name;
 		}
 	}
 	

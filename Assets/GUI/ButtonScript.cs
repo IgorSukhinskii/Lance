@@ -3,7 +3,7 @@ using System.Collections;
 using System;
 using UnityEngine.UI;
 [RequireComponent (typeof (BoxCollider))]
-[RequireComponent (typeof (Image))]
+[RequireComponent (typeof (Text))]
 public class ButtonScript : MonoBehaviour {
 	public enum States {
 		Active,
@@ -14,37 +14,32 @@ public class ButtonScript : MonoBehaviour {
 	public Sprite clickedButtonSprite;
 	
 	[HideInInspector] [SerializeField]
-	private GameObject _iconGO;
+	private GameObject _textGO;
 	[HideInInspector] [SerializeField]
-	private Sprite _icon;
+	private Text _text;
 	[SerializeField]
-	public Sprite icon { 
+	public string text { 
 		get {
-			return _icon;
+			if (_text != null)
+				return _text.text;
+			else 
+				return null;
 		}
 		set {
-			if (value == null) {
-				if (_iconGO != null) 
-					_iconGO.SetActive (false);
-				_icon = value;
+			if (_textGO == null) {
+				_textGO = new GameObject ("text");
+				_text = _textGO.AddComponent <Text> ();
+				_text.color = Color.black;
+				_text.alignment = TextAnchor.MiddleCenter;
+				_text.font = (Font)Resources.GetBuiltinResource(typeof(Font), "Arial.ttf");
 			}
-			else {
-				if (_iconGO == null) {
-					_iconGO = new GameObject ("icon");
-					_iconGO.AddComponent <Image> ();
-				}
-				_iconGO.SetActive (true);
-				_iconGO.transform.SetParent(this.transform, false);
-				_iconGO.transform.localPosition = new Vector3 (0, 0, -0.1f);
-				_iconGO.transform.localScale = Vector3.one;
-				var iconRect = _iconGO.GetComponent <RectTransform> ();
-				iconRect.anchorMax = new Vector2 (0.5f, 1f);
-				iconRect.anchorMin = new Vector2 (0.5f, 1f);
-				var iconImage = _iconGO.GetComponent <Image> ();
-				iconImage.SetNativeSize ();
-				iconImage.sprite = value; 
-				_icon = value;
-			}
+			_textGO.SetActive (true);
+			_textGO.transform.SetParent(this.transform, false);
+			_textGO.transform.localPosition = new Vector3 (0, 0, -0.1f);
+			_textGO.transform.localScale = Vector3.one;
+			_textGO.GetComponent <RectTransform> ().sizeDelta = this.size;
+			_text = _textGO.GetComponent <Text> ();
+			_text.text = value;
 		}
 	}
 	
@@ -64,12 +59,6 @@ public class ButtonScript : MonoBehaviour {
 					var color = this.currentImage.color;
 					color.a = 1f;
 					this.currentImage.color = color;
-					if (icon != null) {
-						var iconImage = this._iconGO.GetComponent <Image> ();
-						color = iconImage.color;
-						color.a = 1f;
-						iconImage.color = color;
-					}
 					break;
 				}
 				case States.Clicked: {
@@ -81,8 +70,8 @@ public class ButtonScript : MonoBehaviour {
 					var color = this.currentImage.color;
 					color.a = 0.5f;
 					this.currentImage.color = color;
-					if (icon != null) {
-						var iconImage = this._iconGO.GetComponent <Image> ();
+					if (text != null) {
+						var iconImage = this._textGO.GetComponent <Image> ();
 						color = iconImage.color;
 						color.a = 0.5f;
 						iconImage.color = color;

@@ -12,12 +12,11 @@ namespace GameWorld.Map
 
     public class GameMap
     {
-        private List<Province> provinces;
-        private Dictionary<Tuple<int, int>, bool> matrix;
-        public IEnumerable<Province> GetProvinces()
-        {
-            return provinces;
+        public List<Province> provinces {
+        	get;
+        	private set;
         }
+        private Dictionary<Tuple<int, int>, bool> matrix;
 
         public GameMap()
         {
