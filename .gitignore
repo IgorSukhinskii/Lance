@@ -3,10 +3,7 @@
 # =============== #
 Temp/
 Obj/
-obj/
-UnityGenerated/
 Library/
-*.meta
 
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
